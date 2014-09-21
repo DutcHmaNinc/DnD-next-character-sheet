@@ -1,0 +1,304 @@
+{
+    "sheet": {
+        "level": [
+            0,
+            300,
+            900,
+            2700,
+            6500,
+            14000,
+            23000,
+            34000,
+            48000,
+            64000,
+            85000,
+            100000,
+            120000,
+            140000,
+            165000,
+            195000,
+            225000,
+            265000,
+            305000,
+            355000
+        ],
+        "proficiency_bonus": {
+            "name": "Proficiency bonus",
+            "level_progression": [
+                1,
+                5,
+                9,
+                13,
+                17
+            ],
+            "value": [
+                2,
+                3,
+                4,
+                5,
+                6
+            ]
+        },
+        "abilities": {
+            "strength": {
+                "name": "STR",
+                "saving_throw": {
+                    "skilled": false
+                }
+            },
+            "dexterity": {
+                "name": "DEX",
+                "saving_throw": {
+                    "skilled": false
+                }
+            },
+            "constitution": {
+                "name": "CON",
+                "saving_throw": {
+                    "skilled": false
+                }
+            },
+            "intelligence": {
+                "name": "INT",
+                "saving_throw": {
+                    "skilled": false
+                }
+            },
+            "wisdom": {
+                "name": "WIS",
+                "saving_throw": {
+                    "skilled": false
+                }
+            },
+            "charisma": {
+                "name": "CHA",
+                "saving_throw": {
+                    "skilled": false
+                }
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "name": "Acrobatics",
+                "key_ability": "dexterity",
+                "skilled": false
+            },
+            "animal_handling": {
+                "name": "Animal Handling",
+                "key_ability": "wisdom",
+                "skilled": false
+            },
+            "arcana": {
+                "name": "Arcana",
+                "key_ability": "intelligence",
+                "skilled": false
+            },
+            "athletics": {
+                "name": "Athletics",
+                "key_ability": "strength",
+                "skilled": false
+            },
+            "deception": {
+                "name": "Deception",
+                "key_ability": "charisma",
+                "skilled": false
+            },
+            "history": {
+                "name": "History",
+                "key_ability": "intelligence",
+                "skilled": false
+            },
+            "insight": {
+                "name": "Insight",
+                "key_ability": "wisdom",
+                "skilled": false
+            },
+            "intimidation": {
+                "name": "Intimidation",
+                "key_ability": "charisma",
+                "skilled": false
+            },
+            "investigation": {
+                "name": "Investigation",
+                "key_ability": "intelligence",
+                "skilled": false
+            },
+            "medicine": {
+                "name": "Medicine",
+                "key_ability": "wisdom",
+                "skilled": false
+            },
+            "nature": {
+                "name": "Nature",
+                "key_ability": "intelligence",
+                "skilled": false
+            },
+            "perception": {
+                "name": "Perception",
+                "key_ability": "wisdom",
+                "skilled": false
+            },
+            "performance": {
+                "name": "Performance",
+                "key_ability": "charisma",
+                "skilled": false
+            },
+            "persuasion": {
+                "name": "Persuasion",
+                "key_ability": "charisma",
+                "skilled": false
+            },
+            "religion": {
+                "name": "Religion",
+                "key_ability": "intelligence",
+                "skilled": false
+            },
+            "sleight_of_hand": {
+                "name": "Sleight of Hand",
+                "key_ability": "dexterity",
+                "skilled": false
+            },
+            "stealth": {
+                "name": "Stealth",
+                "key_ability": "dexterity",
+                "skilled": false
+            },
+            "survival": {
+                "name": "Survival",
+                "key_ability": "wisdom",
+                "skilled": false
+            }
+        },
+        "feats": {
+            "alert": {
+                "name": "Alert"
+            },
+            "athlete": {
+                "name": "Athlete"
+            },
+            "actor": {
+                "name": "Actor"
+            },
+            "charger": {
+                "name": "Charger"
+            },
+            "crossbow_expert": {
+                "name": "Crossbow Expert"
+            },
+            "defensive_duelist": {
+                "name": "Defensive Duelist"
+            },
+            "dual_wielder": {
+                "name": "Dual Wielder"
+            },
+            "dungeon_delver": {
+                "name": "Dungeon Delver"
+            },
+            "durable": {
+                "name": "Durable"
+            },
+            "elemental_adept": {
+                "name": "Elemental Adept"
+            },
+            "grappler": {
+                "name": "Grappler"
+            },
+            "great_weapon_master": {
+                "name": "Great Weapon Master"
+            },
+            "healer": {
+                "name": "Healer"
+            },
+            "heavily_armored": {
+                "name": "Heavily Armored"
+            },
+            "heavy_armor_master": {
+                "name": "Heavy Armor Master"
+            },
+            "inspiring_leader": {
+                "name": "Inspiring Leader"
+            },
+            "keen_mind": {
+                "name": "Keen Mind"
+            },
+            "lightly_armored": {
+                "name": "Lightly Armored"
+            },
+            "linguist": {
+                "name": "Linguist"
+            },
+            "lucky": {
+                "name": "Lucky"
+            },
+            "mage_slayer": {
+                "name": "Mage Slayer"
+            },
+            "magic_initiate": {
+                "name": "Magic Initiate"
+            },
+            "martial_adept": {
+                "name": "Martial Adept"
+            },
+            "medium_armor_master": {
+                "name": "Medium Armor Master"
+            },
+            "mobile": {
+                "name": "Mobile",
+                "adjust": "speed",
+                "value": 10,
+                "description": "<p>You are exceptionally speedy and agile. You gain the following benefits:</p><ul><li>Your speed increases by 10 feet.</li><li>When you use the Dash action, difficult terrain doesn’t cost you extra movement on that turn.</li><li>When you make a melee attack against a creature, you don’t provoke opportunity attacks from that creature for the rest of the turn, whether you hit or not.</li></ul>"
+            },
+            "moderately_armored": {
+                "name": "Moderately Armored"
+            },
+            "mounted_combatant": {
+                "name": "Mounted Combatant"
+            },
+            "observant": {
+                "name": "Observant"
+            },
+            "polearm_master": {
+                "name": "Polearm Master"
+            },
+            "resilient": {
+                "name": "resilient"
+            },
+            "ritual_caster": {
+                "name": "Ritual Caster"
+            },
+            "savage_attacker": {
+                "name": "Savage Attacker"
+            },
+            "sentinel": {
+                "name": "Sentinel"
+            },
+            "sharpshooter": {
+                "name": "Sharpshooter"
+            },
+            "shield_master": {
+                "name": "Shield Master"
+            },
+            "skilled": {
+                "name": "Skilled"
+            },
+            "skulker": {
+                "name": "Skulker"
+            },
+            "spell_sniper": {
+                "name": "Spell Sniper"
+            },
+            "tavern_brawler": {
+                "name": "Tavern Brawler"
+            },
+            "tough": {
+                "name": "Tough"
+            },
+            "war_caster": {
+                "name": "War Caster"
+            },
+            "weapon_master": {
+                "name": "Weapon Master"
+            }
+        }
+    }
+}

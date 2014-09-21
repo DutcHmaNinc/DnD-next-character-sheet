@@ -1,0 +1,62 @@
+{
+    "character": {
+        "name": "Calan 'Sol' Solis",
+        "experience": 0,
+        "race": {
+            "type": "human",
+            "variant": true,
+            "variant_choises": {
+                "abilities_increase": [
+                    "dexterity",
+                    "wisdom"
+                ],
+                "skills": [
+                    "perception"
+                ],
+                "feats": [
+                    "mobile"
+                ]
+            }
+        },
+        "char_class": {
+            "type": "monk",
+            "skills": [
+                "acrobatics",
+                "athletics"
+            ]
+        },
+        "background": {
+            "type": "acolyte",
+            "skills": [
+                "insight",
+                "religion"
+            ]
+        },
+        "abilities": {
+            "strength": {
+                "base_value": 12,
+                "temp_modifier": 0
+            },
+            "dexterity": {
+                "base_value": 17,
+                "temp_modifier": 0
+            },
+            "constitution": {
+                "base_value": 14,
+                "temp_modifier": 0
+            },
+            "intelligence": {
+                "base_value": 10,
+                "temp_modifier": 0
+            },
+            "wisdom": {
+                "base_value": 16,
+                "temp_modifier": 0
+            },
+            "charisma": {
+                "base_value": 10,
+                "temp_modifier": 0
+            }
+        }
+    }
+}

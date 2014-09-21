@@ -1,0 +1,82 @@
+{
+    "charClass": {
+        "name": "Monk",
+        "abilities": {
+            "strength": {
+                "saving_throw": {
+                    "skilled": true
+                }
+            },
+            "dexterity": {
+                "saving_throw": {
+                    "skilled": true
+                }
+            }
+        },
+        "skills": {
+            "choose": 2,
+            "from": [
+                "acrobatics",
+                "athletics",
+                "history",
+                "insight",
+                "religion",
+                "stealth"
+            ]
+        },
+        "features": {
+            "unarmored_defence": {
+                "name": "Unarmored Defense",
+                "level": 1,
+                "value": false,
+                "adjust": "armor_class",
+                "description": "Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier."
+            },
+            "martial_arts": {
+                "name": "Martial Arts",
+                "level": 1,
+                "level_progression": [
+                    1,
+                    5,
+                    11,
+                    17
+                ],
+                "value": [
+                    "1d4",
+                    "1d6",
+                    "1d8",
+                    "1d10"
+                ],
+                "adjust": "unarmed_damage",
+                "description": "test"
+            },
+            "ki": {
+                "name": "Ki",
+                "level": 2,
+                "value": false,
+                "adjust": "power_table",
+                "description": "test"
+            },
+            "unarmored_movement": {
+                "name": "Unarmored Movement",
+                "level": 2,
+                "level_progression": [
+                    2,
+                    6,
+                    10,
+                    14,
+                    18
+                ],
+                "value": [
+                    10,
+                    15,
+                    20,
+                    25,
+                    30
+                ],
+                "adjust": "speed",
+                "description": "test"
+            }
+        }
+    }
+}

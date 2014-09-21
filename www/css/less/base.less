@@ -1,0 +1,39 @@
+@import "mixins";
+
+body, html {
+    height: 100%;
+}
+.sticky-footer {
+    .sticky-footer-style(@footer-height);
+}
+
+#main-wrapper {
+    height: 100%;
+}
+
+.center-container {
+    max-width: @site-width;
+    padding: 0 @side-padding;
+    margin: 0 auto;
+}
+
+.footer.wrapper {
+    .footer-wrap-style(@footer-height);
+}
+
+#skills,
+#abilities {
+    .table {
+        tr{
+            td, th {
+                text-align: center;
+                &:first-child {
+                    text-align: left;
+                    padding-left: @panel-body-padding;
+                }
+            }
+        }
+    }
+}
+
+
