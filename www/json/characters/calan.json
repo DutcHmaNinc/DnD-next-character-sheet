@@ -18,6 +18,10 @@
                 ]
             }
         },
+        "alignment": {
+            "law_chaos": "neutral",
+            "good_evil": "good"
+        },
         "char_class": {
             "type": "monk",
             "skills": [

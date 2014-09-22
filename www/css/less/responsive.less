@@ -4,10 +4,28 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
 
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: @screen-md-min) { 
+    
+    .information.column {
+        > .gridrow {
+            .grid.row(@gutter_rem);
+            .clearfix;
+            > .column {
+                .grid.column;
+                .grid.span(@max_columns, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
+                
+                &.info {
+                    .grid.span-firstchild(@max_columns - 24, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
+                }
+                &.stats {
+                    .grid.span(12, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
+                }
+                &.other {
+                    .grid.span(12, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
+                }
+            }
+        }
+    }
+    
     .data.column {
         @maxcolumns: @max_columns - 16;
         > .gridrow {
@@ -17,25 +35,37 @@
                 .grid.column;
                 .grid.span(@maxcolumns, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 
-                &.info {
-                    .grid.span-firstchild(@maxcolumns, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
-                }
                 &.abilities {
                     .grid.span-firstchild(@maxcolumns, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
                 &.skills {
                     .grid.span-firstchild(@maxcolumns - 10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
-                &.stats {
-                    .grid.span(10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
-                    float: right;
-                }
+                //&.stats {
+                //    .grid.span(10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
+                //    float: right;
+                //}
                 &.features {
                     .grid.span(10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
                 &.feats {
                     .grid.span(10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
+            }
+        }
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+    .column.info {
+        .panel-body {
+            @max_columns: 2;
+            .grid.row(@gutter_rem);
+            .clearfix;
+            p {
+                .grid.column;
+                .grid.span-firstchild(1, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
             }
         }
     }

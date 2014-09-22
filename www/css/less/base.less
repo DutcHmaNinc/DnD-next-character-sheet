@@ -36,4 +36,23 @@ body, html {
     }
 }
 
-
+.column.info {
+    .panel-body {
+        p {
+            > strong,
+            > span {
+                float: left;
+                display: block;
+            }
+            > span {
+                width: 45%;
+                font-size: @font-size-small;
+                text-align: right;
+                padding-right: @panel-body-padding;
+            }
+            > strong {
+                width: 55%;
+            }
+        }
+    }
+}

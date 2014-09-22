@@ -39,6 +39,30 @@
                 6
             ]
         },
+        "alignment": {
+            "law_chaos": {
+                "law": {
+                    "name": "Law"
+                },
+                "neutral": {
+                    "name": "Neutral"
+                },
+                "choas": {
+                    "name": "Choas"
+                }
+            },
+            "good_evil": {
+                "good": {
+                    "name": "Good"
+                },
+                "neutral": {
+                    "name": "Neutral"
+                },
+                "evil": {
+                    "name": "Evil"
+                }
+            }
+        },
         "abilities": {
             "strength": {
                 "name": "STR",

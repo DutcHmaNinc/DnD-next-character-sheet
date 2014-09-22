@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Paul's D&D next character sheet</title>
+        <title>DutcHmaNinc's D&D next character sheet</title>
         <meta name="description" content="A D&D next character sheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/skin.css">
@@ -20,10 +20,8 @@
 			<div class="sticky-footer">
 				<div class="sticky-wrap">
 					<header class="header wrapper">
-						<!--<div class="center-container">-->
 							<nav class="navbar navbar-default" role="navigation">
 							  <div class="container-fluid">
-								<!-- Brand and toggle get grouped for better mobile display -->
 								<div class="navbar-header">
 								  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 									<span class="sr-only">Toggle navigation</span>
@@ -33,10 +31,11 @@
 								  </button>
 								  <a class="navbar-brand" href="#">DnD next character sheet</a>
 								</div>
-
-								<!-- Collect the nav links, forms, and other content for toggling -->
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-								  <form class="navbar-form navbar-left" role="select">
+								  <form id="selectCharacter" class="navbar-form navbar-left">
+									<!-- 	TODO: Find all files in /json/character/ and put them in this list
+											TODO: Functionality to load the selected character
+									-->
 									<div class="form-group">
 										<select class="form-control">
 											<option value="one">One</option>
@@ -46,19 +45,18 @@
 											<option value="five">Five</option>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-default">Submit</button>
+									<button type="submit" class="btn btn-default">Load Character</button>
 								  </form>
-								</div><!-- /.navbar-collapse -->
-							  </div><!-- /.container-fluid -->
+								</div>
+							  </div>
 							</nav>
-						<!--</div>-->
 					</header>
 					<div class="main wrapper">
 						<div class="center-container">
 							<article class="character gridrow">
 								<header id="characterName" class="column head">
 								</header>
-								<div class="column data">
+								<div class="column information">
 									<div class="gridrow">
 										<div class="column info">
 											<section id="characterInfo" class="panel panel-default">
@@ -68,14 +66,29 @@
 												<div class="panel-body"></div>												
 											</section>
 										</div>
+										<div class="column stats">
+											<section id="stats" class="panel panel-default">
+												<header class="panel-heading">
+													<h2 class="panel-title">Stats</h2>
+												</header>
+												<ul class="list-group">
+													
+												</ul>
+											</section>
+										</div>
+										<div class="column other">
+											Something else
+										</div>
+									</div>
+								</div>
+								<div class="column data">
+									<div class="gridrow">
 										<div class="column abilities">
 											<section id="abilities" class="panel panel-default">
-												<!-- Default panel contents -->
 												<header class="panel-heading">
 													<h2 class="panel-title">Abilities</h2>
 												</header>
 												<!-- <div class="panel-body"></div> -->
-												<!-- Table -->
 												<div class="table-responsive">
 													<table class="table">
 														<thead>
@@ -95,24 +108,12 @@
 												</div>
 											</section>
 										</div>
-										<div class="column stats">
-											<section id="stats" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Stats</h2>
-												</header>
-												<ul class="list-group">
-													
-												</ul>
-											</section>
-										</div>
 										<div class="column skills">
 											<section id="skills" class="panel panel-default">
-												<!-- Default panel contents -->
 												<header class="panel-heading">
 													<h2 class="panel-title">Skills</h2>
 												</header>
 												<!-- <div class="panel-body"></div> -->
-												<!-- Table -->
 												<div class="table-responsive">
 													<table class="table">
 														<thead>
@@ -152,7 +153,10 @@
 									</div>
 								</div>
 								<section class="column other">
-									something else
+									<!-- 	TODO: Add weapons and equipment
+											TODO: Functionality to select and add equipment / equipment
+									-->
+									Weapons and Equipment
 								</section>
 							</article>
 						</div>
@@ -161,7 +165,7 @@
 				</div>
 				<footer class="footer wrapper">
 					<div class="center-container">
-						<h3>footer <i class="fa fa-search"></i></h3>
+						<p>A DnD next Character Sheet - By DutcHmaNinc</p>
 					</div>
 				</footer>
 			</div>
