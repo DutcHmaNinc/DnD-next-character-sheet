@@ -42,13 +42,13 @@
         "alignment": {
             "law_chaos": {
                 "law": {
-                    "name": "Law"
+                    "name": "Lawfull"
                 },
                 "neutral": {
                     "name": "Neutral"
                 },
                 "choas": {
-                    "name": "Choas"
+                    "name": "Chaotic"
                 }
             },
             "good_evil": {

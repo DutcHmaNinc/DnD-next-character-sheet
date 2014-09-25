@@ -22,13 +22,6 @@
             "law_chaos": "neutral",
             "good_evil": "good"
         },
-        "char_class": {
-            "type": "monk",
-            "skills": [
-                "acrobatics",
-                "athletics"
-            ]
-        },
         "background": {
             "type": "acolyte",
             "skills": [
@@ -61,6 +54,22 @@
                 "base_value": 10,
                 "temp_modifier": 0
             }
-        }
+        },
+        "level_progression": [
+            {
+                "char_class": {
+                    "type": "monk",
+                    "skills": [
+                        "acrobatics",
+                        "athletics"
+                    ]
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            }
+        ]
     }
 }

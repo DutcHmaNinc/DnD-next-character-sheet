@@ -1,8 +1,9 @@
-@import "mixins";
+@import "../skin.less";
 
 body, html {
     height: 100%;
 }
+
 .sticky-footer {
     .sticky-footer-style(@footer-height);
 }
@@ -21,12 +22,12 @@ body, html {
     .footer-wrap-style(@footer-height);
 }
 
-#skills,
-#abilities {
+.panel {
     .table {
-        tr{
+        tr {
             td, th {
                 text-align: center;
+
                 &:first-child {
                     text-align: left;
                     padding-left: @panel-body-padding;
@@ -44,12 +45,14 @@ body, html {
                 float: left;
                 display: block;
             }
+
             > span {
                 width: 45%;
                 font-size: @font-size-small;
                 text-align: right;
                 padding-right: @panel-body-padding;
             }
+
             > strong {
                 width: 55%;
             }

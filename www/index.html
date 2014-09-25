@@ -1,179 +1,195 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>DutcHmaNinc's D&D next character sheet</title>
-        <meta name="description" content="A D&D next character sheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/skin.css">
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-		<div id="main-wrapper">
-			<div class="sticky-footer">
-				<div class="sticky-wrap">
-					<header class="header wrapper">
-							<nav class="navbar navbar-default" role="navigation">
-							  <div class="container-fluid">
-								<div class="navbar-header">
-								  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								  </button>
-								  <a class="navbar-brand" href="#">DnD next character sheet</a>
-								</div>
-								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-								  <form id="selectCharacter" class="navbar-form navbar-left">
-									<!-- 	TODO: Find all files in /json/character/ and put them in this list
-											TODO: Functionality to load the selected character
-									-->
-									<div class="form-group">
-										<select class="form-control">
-											<option value="one">One</option>
-											<option value="two">Two</option>
-											<option value="three">Three</option>
-											<option value="four">Four</option>
-											<option value="five">Five</option>
-										</select>
-									</div>
-									<button type="submit" class="btn btn-default">Load Character</button>
-								  </form>
-								</div>
-							  </div>
-							</nav>
-					</header>
-					<div class="main wrapper">
-						<div class="center-container">
-							<article class="character gridrow">
-								<header id="characterName" class="column head">
-								</header>
-								<div class="column information">
-									<div class="gridrow">
-										<div class="column info">
-											<section id="characterInfo" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Character info</h2>
-												</header>
-												<div class="panel-body"></div>												
-											</section>
-										</div>
-										<div class="column stats">
-											<section id="stats" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Stats</h2>
-												</header>
-												<ul class="list-group">
-													
-												</ul>
-											</section>
-										</div>
-										<div class="column other">
-											Something else
-										</div>
-									</div>
-								</div>
-								<div class="column data">
-									<div class="gridrow">
-										<div class="column abilities">
-											<section id="abilities" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Abilities</h2>
-												</header>
-												<!-- <div class="panel-body"></div> -->
-												<div class="table-responsive">
-													<table class="table">
-														<thead>
-															<tr>
-																<th class="abilities" colspan="2"><span>Ability</span></th>
-																<th><span>Temp<br />Modifier</span></th>
-																<th><span>Item<br />Modifier</span></th>
-																<th><span>End<br />Score</span></th>
-																<th><span>Modifier</span></th>
-																<th><span>Saving<br />throws</span></th>
-																<th><span>Modifier</span></th>
-															</tr>
-														</thead>
-														<tbody>
-														</tbody>
-													</table>
-												</div>
-											</section>
-										</div>
-										<div class="column skills">
-											<section id="skills" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Skills</h2>
-												</header>
-												<!-- <div class="panel-body"></div> -->
-												<div class="table-responsive">
-													<table class="table">
-														<thead>
-															<tr>
-																<th><span>Skill</span></th>
-																<th><span>Key<br />Ability</span></th>
-																<th><span>Skilled</span></th>
-																<th><span>Total</span></th>
-															</tr>
-														</thead>
-														<tbody>
-														</tbody>
-													</table>
-												</div>
-											</section>
-										</div>
-										<div class="column features">
-											<section id="features" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Features</h2>
-												</header>
-												<ul class="list-group">
-													
-												</ul>
-											</section>
-										</div>
-										<div class="column feats">
-											<section id="feats" class="panel panel-default">
-												<header class="panel-heading">
-													<h2 class="panel-title">Feats</h2>
-												</header>
-												<ul class="list-group">
-													
-												</ul>
-											</section>
-										</div>
-									</div>
-								</div>
-								<section class="column other">
-									<!-- 	TODO: Add weapons and equipment
-											TODO: Functionality to select and add equipment / equipment
-									-->
-									Weapons and Equipment
-								</section>
-							</article>
-						</div>
-					</div>
-					<div class="sticky-push"></div>
-				</div>
-				<footer class="footer wrapper">
-					<div class="center-container">
-						<p>A DnD next Character Sheet - By DutcHmaNinc</p>
-					</div>
-				</footer>
-			</div>
-		</div>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>DutcHmaNinc's D&D next character sheet</title>
+    <meta name="description" content="A D&D next character sheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/skin.min.css">
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div id="main-wrapper">
+        <div class="sticky-footer">
+            <div class="sticky-wrap">
+                <header class="header wrapper">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">DnD next character sheet</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <form id="selectCharacter" class="navbar-form navbar-left">
+                                    <!-- 	TODO: Find all files in /json/character/ and put them in this list
+                                            TODO: Functionality to load the selected character
+                                    -->
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option value="one">One</option>
+                                            <option value="two">Two</option>
+                                            <option value="three">Three</option>
+                                            <option value="four">Four</option>
+                                            <option value="five">Five</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Load Character</button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+                <div class="main wrapper">
+                    <div class="center-container">
+                        <article class="character gridrow">
+                            <header id="characterName" class="column head"></header>
+                            <div class="column information">
+                                <div class="gridrow">
+                                    <div class="column info">
+                                        <section id="characterInfo" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Character info</h2>
+                                            </header>
+                                            <div class="panel-body"></div>
+                                        </section>
+                                    </div>
+                                    <div class="column level">
+                                        <section id="level" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Level</h2>
+                                            </header>
+                                            <ul class="list-group"></ul>
+                                        </section>
+                                    </div>
+                                    <div class="column stats">
+                                        <section id="stats" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Stats</h2>
+                                            </header>
+                                            <ul class="list-group"></ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column data">
+                                <div class="gridrow">
+                                    <div class="column abilities">
+                                        <section id="abilities" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Abilities</h2>
+                                            </header>
+                                            <!-- <div class="panel-body"></div> -->
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="abilities" colspan="2"><span>Ability</span></th>
+                                                            <th class="hidden-xs"><span>Temp<br />Modifier</span></th>
+                                                            <th class="hidden-xs"><span>Item<br />Modifier</span></th>
+                                                            <th><span>End<br />Score</span></th>
+                                                            <th><span>Modifier</span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="column saving-throws">
+                                        <section id="savingThrows" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Saving throws</h2>
+                                            </header>
+                                            <!-- <div class="panel-body"></div> -->
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span>Ability</span></th>
+                                                            <th><span>Saving<br />throws</span></th>
+                                                            <th><span>Modifier</span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+                                        </section>
+                                    </div>
+                                    <div class="column skills">
+                                        <section id="skills" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Skills</h2>
+                                            </header>
+                                            <!-- <div class="panel-body"></div> -->
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span>Skill</span></th>
+                                                            <th><span>Key<br />Ability</span></th>
+                                                            <th><span>Skilled</span></th>
+                                                            <th><span>Total</span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="column features">
+                                        <section id="features" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Features</h2>
+                                            </header>
+                                            <ul class="list-group"></ul>
+                                        </section>
+                                    </div>
+                                    <div class="column feats">
+                                        <section id="feats" class="panel panel-default">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Feats</h2>
+                                            </header>
+                                            <ul class="list-group"></ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <section class="column other">
+                                <!-- 	TODO: Add weapons and equipment
+                                        TODO: Functionality to select and add equipment / equipment
+                                -->
+                                Weapons and Equipment
+                            </section>
+                        </article>
+                    </div>
+                </div>
+                <div class="sticky-push"></div>
+            </div>
+            <footer class="footer wrapper">
+                <div class="center-container">
+                    <p>A DnD next Character Sheet - By DutcHmaNinc</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>

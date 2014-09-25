@@ -1,43 +1,53 @@
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
+@import "../skin.less";
 
-/* Small devices (tablets, 768px and up) */
+// Small devices (tablets, 768px and up) 
 @media (min-width: @screen-sm-min) {
 
-    
+
     .information.column {
         > .gridrow {
             .grid.row(@gutter_rem);
             .clearfix;
+
             > .column {
                 .grid.column;
                 .grid.span(@max_columns, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
-                
+
                 &.info {
                     .grid.span-firstchild(@max_columns - 24, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
+
                 &.stats {
                     .grid.span(12, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
-                &.other {
+
+                &.level {
                     .grid.span(12, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
+                    float: right;
                 }
             }
         }
     }
-    
+
     .data.column {
         @maxcolumns: @max_columns - 16;
+
         > .gridrow {
             .grid.row(@gutter_rem);
             .clearfix;
+
             > .column {
                 .grid.column;
                 .grid.span(@maxcolumns, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
-                
+
                 &.abilities {
-                    .grid.span-firstchild(@maxcolumns, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
+                    .grid.span-firstchild(@maxcolumns - 8, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
+
+                &.saving-throws {
+                    .grid.span(8, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
+                }
+
                 &.skills {
                     .grid.span-firstchild(@maxcolumns - 10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
@@ -48,6 +58,7 @@
                 &.features {
                     .grid.span(10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
+
                 &.feats {
                     .grid.span(10, @maxcolumns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
@@ -56,13 +67,14 @@
     }
 }
 
-/* Medium devices (desktops, 992px and up) */
+// Medium devices (desktops, 992px and up) 
 @media (min-width: @screen-md-min) {
     .column.info {
         .panel-body {
             @max_columns: 2;
             .grid.row(@gutter_rem);
             .clearfix;
+
             p {
                 .grid.column;
                 .grid.span-firstchild(1, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
@@ -71,28 +83,30 @@
     }
 }
 
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: @screen-lg-min) { 
+// Large devices (large desktops, 1200px and up) 
+@media (min-width: @screen-lg-min) {
 
     .character {
         &.gridrow {
             .grid.row(@gutter_rem);
             .clearfix;
+
             > .column {
                 .grid.column;
                 .grid.span(@max_columns, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
-                
+
                 &.data {
                     .grid.span-firstchild(@max_columns - 16, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
+
                 &.head {
                     .grid.span-firstchild(@max_columns, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
+
                 &.other {
                     .grid.span(16, @max_columns, @gutter_pc, @gutter_rem, @padding_rem);
                 }
-            }    
+            }
         }
     }
-
 }
