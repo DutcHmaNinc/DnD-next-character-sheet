@@ -7885,6 +7885,10 @@ html {
   text-align: left;
   padding-left: 15px;
 }
+.column.info .panel-body p img {
+  display: block;
+  margin: 0 auto;
+}
 .column.info .panel-body p > strong,
 .column.info .panel-body p > span {
   float: left;
@@ -7898,6 +7902,12 @@ html {
 }
 .column.info .panel-body p > strong {
   width: 55%;
+}
+.panel img {
+  display: inline;
+  width: 100% \9;
+  max-width: 100%;
+  height: auto;
 }
 @media (min-width: 768px) {
   .information.column > .gridrow {
