@@ -1,8 +1,6 @@
-DnD-next-character-sheet
+DnD next Character Sheet
 ========================
 
-My w.i.p. character sheet for DnD next
+My character sheet for DnD next. It's a work in progress.
 
 Basic HTML, javascript / jQuery with json files.
-
-WHAZAAAAAAAAAAAAAAAAAAAAAAAAAAAA
