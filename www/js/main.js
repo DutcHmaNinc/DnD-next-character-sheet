@@ -73,7 +73,7 @@ $.when(
 	        // ACTIVE FEATURES
 	        for (var feature in featuresData) {
 	            $('#features .list-group').append(
-					listNoBadge(classFeatures[feature].name)
+					listWithModalToggle(classFeatures[feature].name, classFeatures[feature].description || "empty")
 				);
 
 	            // LOOK FOR FEATURE STAT ADJUSTMENT
@@ -93,6 +93,7 @@ $.when(
 	                featureAdjustData[adjust] = modifier
 	            }
 	        }
+	        showModal($('#features .list-group > a'));
 	        console.log(featureAdjustData);
 
 	        // GET PROFICIENCY BONUS
@@ -135,7 +136,7 @@ $.when(
 	        // FEATS
 	        for (var feat in featsData) {
 	            $('#feats .list-group').append(
-					listNoBadge(charSheet.feats[feat].name)
+					listWithModalToggle(charSheet.feats[feat].name, charSheet.feats[feat].description || "empty")
 				);
 	            if (charSheet.feats[feat].adjust) {
 	                var ft = charSheet.feats[feat],
@@ -153,6 +154,8 @@ $.when(
 	                featAdjustData[adjust] = modifier
 	            }
 	        }
+
+	        showModal($('#feats .list-group > a'));
 	        console.log(featAdjustData);
 
 	        // ABILITIES AND SAVING THROWS
@@ -283,4 +286,17 @@ function listNoBadge(value) {
 
 function listWithBadge(key, value) {
     return '<li class="list-group-item"><span class="badge">' + key + '</span>' + value + '</li>';
+}
+
+function listWithModalToggle(name, description) {
+    return '<a href="#" class="list-group-item" data-description="' + description + '">' + name + '</a>';
+}
+
+function showModal($object) {
+    $object.on('click', function () {
+        var clicked = $(this);
+        $('#descriptionModal .modal-header h4').html(clicked.html());
+        $('#descriptionModal .modal-body').html(clicked.data('description'));
+        $('#descriptionModal').modal();
+    });
 }
