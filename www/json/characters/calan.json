@@ -69,6 +69,109 @@
                 "char_class": {
                     "type": "monk"
                 }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                },
+                "monastic_traditions": "way_of_the_open_hand"
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                },
+                "ability_score_improvement": false,
+                "feats": {
+                    "name": "resilient",
+                    "abilities_increase": {
+                        "wisdom": {
+                            "value": 1,
+                            "saving_throw": {
+                                "skilled": true
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
+            },
+            {
+                "char_class": {
+                    "type": "monk"
+                }
             }
         ]
     }

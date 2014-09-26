@@ -61,6 +61,12 @@ $.when(
 	        }
 	        console.log("Level: " + level);
 
+            // TODO: Count level for each type of class
+	        for (var i = 0; i < level.length ; i++) {
+	            myChar.level_progression[i].char_class.type
+	        }
+
+
 	        // TODO: Get level per class for multiclass characters
 
 	        // FEATURES	
@@ -289,7 +295,7 @@ function listWithBadge(key, value) {
 }
 
 function listWithModalToggle(name, description) {
-    return '<a href="#" class="list-group-item" data-description="' + description + '">' + name + '</a>';
+    return '<a href="javascript:void(0)" class="list-group-item" data-description="' + description + '">' + name + '</a>';
 }
 
 function showModal($object) {
