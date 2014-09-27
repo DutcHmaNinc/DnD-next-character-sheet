@@ -53,66 +53,21 @@ $.when(
 	        // GET TOTAL LEVEL 
 	        var xp = myChar.experience,
 				xpList = charSheet.level,
-				level;
+				level = calculateLevel(xpList, xp);
 
-	        for (var i = 0; i < xpList.length ; i++) {
-	            if (xpList[i] > xp) break;
-	            level = i + 1;
-	        }
-	        console.log("Level: " + level);
-
-            // TODO: Count level for each type of class
-	        for (var i = 0; i < level.length ; i++) {
-	            myChar.level_progression[i].char_class.type
-	        }
-
+	        // TODO: Count level for each type of class
+	        var classedList = getLevelperClass(myChar, level);
 
 	        // TODO: Get level per class for multiclass characters
 
 	        // FEATURES	
-	        var classFeatures = charClass.features;
-	        for (var feature in classFeatures) {
-	            classFeatures[feature].level <= level ? featuresData[feature] = true : "";
-	        }
-	        console.log(featuresData);
-
-	        // ACTIVE FEATURES
-	        for (var feature in featuresData) {
-	            $('#features .list-group').append(
-					listWithModalToggle(classFeatures[feature].name, classFeatures[feature].description || "empty")
-				);
-
-	            // LOOK FOR FEATURE STAT ADJUSTMENT
-	            if (classFeatures[feature].adjust) {
-	                var fa = classFeatures[feature],
-						adjust = fa.adjust,
-						modifier;
-
-	                if (fa.level_progression) {
-	                    for (var i = 0; i < fa.level_progression.length ; i++) {
-	                        if (fa.level_progression[i] > level) break;
-	                        modifier = fa.value[i];
-	                    }
-	                } else {
-	                    modifier = fa.value
-	                }
-	                featureAdjustData[adjust] = modifier
-	            }
-	        }
-	        showModal($('#features .list-group > a'));
-	        console.log(featureAdjustData);
+	        featuresData = getFeaturesBasedOnClassLevel(charClass, classedList[charClass.type]);
+	        featureAdjustData = addActiveFeaturesToList(charClass, featuresData, level, '#features .list-group');
+	        
 
 	        // GET PROFICIENCY BONUS
 	        var sheetPB = charSheet.proficiency_bonus,
-				lvlProgPB = sheetPB.level_progression,
-				valuePB = sheetPB.value,
-				proficiencyBonus;
-
-	        for (var i = 0; i < lvlProgPB.length ; i++) {
-	            if (lvlProgPB[i] > level) break;
-	            proficiencyBonus = valuePB[i];
-	        }
-	        console.log("Proficiency Bonus: " + proficiencyBonus);
+				proficiencyBonus = getProficiencyBonus(sheetPB, level);	        
 
 	        // RACE DATA
 	        var myRace = myChar.race;
@@ -305,4 +260,81 @@ function showModal($object) {
         $('#descriptionModal .modal-body').html(clicked.data('description'));
         $('#descriptionModal').modal();
     });
+}
+
+function calculateLevel(xpList, xp) {
+    var level;
+    for (var i = 0; i < xpList.length ; i++) {
+        if (xpList[i] > xp) break;
+        level = i + 1;
+    }
+    console.log("Level: " + level);
+
+    return level
+}
+
+function getLevelperClass(myChar, level) {
+    var classedList = [];
+    for (var i = 0; i < level ; i++) {
+        classedList[myChar.level_progression[i].char_class.type] ? classedList[myChar.level_progression[i].char_class.type] += 1 : classedList[myChar.level_progression[i].char_class.type] = 1
+    }
+    console.log(classedList);
+
+    return classedList
+}
+
+function getFeaturesBasedOnClassLevel(charClass, level) {
+    var classFeatures = charClass.features,
+        featuresData = [];
+    for (var feature in classFeatures) {
+        classFeatures[feature].level <= level ? featuresData[feature] = true : "";
+    }
+    console.log(featuresData);
+
+    return featuresData;
+}
+
+function addActiveFeaturesToList(charClass, featuresData, level, appendTo) {
+    var classFeatures = charClass.features,
+        featureAdjustData = [];
+
+    for (var feature in featuresData) {
+        $(appendTo).append(
+            listWithModalToggle(classFeatures[feature].name, classFeatures[feature].description || "empty")
+        );
+
+        // LOOK FOR FEATURE STAT ADJUSTMENT
+        if (classFeatures[feature].adjust) {
+            var fa = classFeatures[feature],
+                adjust = fa.adjust,
+                modifier;
+
+            if (fa.level_progression) {
+                for (var i = 0; i < fa.level_progression.length ; i++) {
+                    if (fa.level_progression[i] > level) break;
+                    modifier = fa.value[i];
+                }
+            } else {
+                modifier = fa.value
+            }
+            featureAdjustData[adjust] = modifier
+        }
+    }
+    showModal($(appendTo + ' > a'));
+    console.log(featureAdjustData);
+
+    return featureAdjustData;
+}
+
+function getProficiencyBonus(sheetPB, level) {
+    var lvlProgPB = sheetPB.level_progression,
+		valuePB = sheetPB.value,
+        proficiencyBonus;
+    for (var i = 0; i < lvlProgPB.length ; i++) {
+        if (lvlProgPB[i] > level) break;
+        proficiencyBonus = valuePB[i];
+    }
+    console.log("Proficiency Bonus: " + proficiencyBonus);
+
+    return proficiencyBonus
 }

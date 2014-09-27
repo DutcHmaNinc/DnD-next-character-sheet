@@ -1,7 +1,7 @@
 {
     "character": {
         "name": "Calan 'Sol' Solis",
-        "experience": 0,
+        "experience": 300,
         "race": {
             "type": "human",
             "variant": true,

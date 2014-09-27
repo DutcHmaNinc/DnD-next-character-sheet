@@ -1,6 +1,7 @@
 {
     "charClass": {
         "name": "Monk",
+        "type": "monk",
         "abilities": {
             "strength": {
                 "saving_throw": {
