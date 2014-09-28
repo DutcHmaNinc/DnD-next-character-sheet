@@ -1,4 +1,4 @@
-var $sheet, $char, $class = [], $classJson, $classFile, $race, $raceJson, $raceFile, $background, $backgroundJson, $backgroundFile;
+var $sheet, $char, $class = [], $classJson, $classFile, $race, $raceJson, $raceFile, $background, $backgroundJson, $backgroundFile, level, classesList;
 
 // LOAD SHEET AND CHARACTER
 $.when(
@@ -6,9 +6,8 @@ $.when(
     $.getJSON("json/characters/calan.json", function (data) { $char = data; })
 ).then(function () {
 
-    var level = calculateLevel($sheet.sheet.level, $char.character.experience),
-        classesList = getLevelperClass($char.character, level);
-
+    level = calculateLevel($sheet.sheet.level, $char.character.experience);
+    classesList = getLevelperClass($char.character, level);
     $class = loadClasses(classesList);
 
     $.when(
@@ -59,76 +58,28 @@ $.when(
 	        } else {
 	            // TODO: If not variant.
 	        }
-
 	        // CLASS AND BACKGROUND SKILLS
 	        myChar.level_progression[0].char_class.skills.forEach(function (skill) { skillsData[skill] = true });
 	        myChar.background.skills.forEach(function (skill) { skillsData[skill] = true });
 	        console.log(skillsData);
 	        console.log(featsData);
-
-
 	        // LOAD FEAT AND RETURN IF THEY ADJUST ANYTHING
 	        featAdjustData = loadFeats(featsData, charSheet, '#feats .list-group')
-
 	        // FEATURES PER CLASS
 	        for (var myClasses in $class) {
 	            var charClass = $class[myClasses].charClass;
 	            featuresData = getFeaturesBasedOnClassLevel(charClass, classesList[charClass.type]);
 	            featureAdjustData = addActiveFeaturesToList(charClass, featuresData, classesList[myClasses], '#features .list-group');
 	        }
-
 	        // ABILITIES AND SAVING THROWS
 	        var sheetAbilities = charSheet.abilities,
                 charAbilities = myChar.abilities,
-                classAbilities = loadClassAbilities($class);
-
+                classAbilities = getClassAbilities($class);
 	        skillModifierData = abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities, abilitiesData, proficiencyBonus);
-
 	        // SKILLS
 	        skills(charSheet.skills, skillsData, skillModifierData, sheetAbilities, proficiencyBonus);
-
-	        // CHARACTER INFO
-	        var cName = myChar.name,
-				cRace = charRace.name,
-				cBackground = charBackground.name,
-				cClass = $class["monk"].name,
-				alignment = getAlignment(charSheet, myChar.alignment.law_chaos, myChar.alignment.good_evil);
-
-	        $('#characterName').append('<p>Name: </p><h1>' + cName + '</h1>');
-
-	        $('#characterInfo .panel-body').append(
-				'<p>' + label('Race: ', cRace) + '<br />' +
-				label('Background: ', cBackground) + '<br />' +
-				label('Class: ', cClass) + '<br />' +
-				label('Level: ', level) + '<br />' +
-				label('Alignment: ', alignment) + '</p>');
-
-	        // OTHER STATS			
-	        var passiveWisdom = 10 + (skillModifierData["wisdom"]) + (skillsData["perception"] ? proficiencyBonus : 0),
-				passiveWisdomName = "Passive wisdom",
-				passiveIntelligence = 10 + (skillModifierData["intelligence"]) + (skillsData["investigation"] ? proficiencyBonus : 0),
-	            passiveIntelligenceName = "Passive Intelligence",
-                speedTotal = charRace.base_speed + (featureAdjustData["speed"] || 0) + (featAdjustData["speed"] || 0),
-                speed = speedTotal + ' feet',
-                speedName = "Speed",
-                dex = skillModifierData["dexterity"],
-                initiative = dex == 0 ? dex : '+' + dex,
-                initiativeName = "Initiative",
-                profBonus = '+' + proficiencyBonus;
-
-	        $('#stats .list-group').append(
-				listWithBadge(profBonus, charSheet.proficiency_bonus.name) +
-				listWithBadge(initiative, initiativeName) +
-				listWithBadge(speed, speedName) +
-				listWithBadge(passiveWisdom, passiveWisdomName) +
-				listWithBadge(passiveIntelligence, passiveIntelligenceName)
-			);
-	        $('#level .list-group').append(
-                listWithBadge(myChar.experience, 'Experience Points') +
-                listWithBadge(level, 'Level')
-
-                // TODO: Make levels for each type of class (multiclasses)
-            );
+            // CHARACTER INFO
+	        characterInfo(myChar, charSheet, charRace, charBackground, $class, classesList, skillsData, skillModifierData, featAdjustData, featureAdjustData, proficiencyBonus);
 	    }
 	})
 });
@@ -279,7 +230,7 @@ function loadFeats(featsData, charSheet, location) {
     return featAdjustData;
 }
 
-function loadClassAbilities($class) {
+function getClassAbilities($class) {
     var classAbilities = [];
     for (var myClasses in $class) {
         var charClass = $class[myClasses].charClass;
@@ -348,4 +299,57 @@ function skills(sheetSkills, skillsData, skillModifierData, sheetAbilities, prof
 
 function getAlignment(charSheet, lawChaos, goodEvil) {
     return lawChaos == "neutral" && goodEvil == "neutral" ? "True Neutral" : charSheet.alignment.law_chaos[lawChaos].name + ' ' + charSheet.alignment.good_evil[goodEvil].name;
+}
+
+
+function characterInfo(myChar, charSheet, charRace, charBackground, $class, classesList, skillsData, skillModifierData, featAdjustData, featureAdjustData, proficiencyBonus) {
+    // CHARACTER INFO
+    var cName = myChar.name,
+        cRace = charRace.name,
+        cBackground = charBackground.name,
+        cClass = $class["monk"].name,
+        alignment = getAlignment(charSheet, myChar.alignment.law_chaos, myChar.alignment.good_evil),
+        level = 0;
+
+    for (var mClass in classesList) { level += classesList[mClass]; }
+
+    $('#characterName').append('<p>Name: </p><h1>' + cName + '</h1>');
+
+    $('#characterInfo .panel-body').append(
+        '<p>' + label('Race: ', cRace) + '<br />' +
+        label('Background: ', cBackground) + '<br />' +
+        label('Class: ', cClass) + '<br />' +
+        label('Level: ', level) + '<br />' +
+        label('Alignment: ', alignment) + '</p>');
+
+    // OTHER STATS			
+    var passiveWisdom = 10 + (skillModifierData["wisdom"]) + (skillsData["perception"] ? proficiencyBonus : 0),
+        passiveWisdomName = "Passive wisdom",
+        passiveIntelligence = 10 + (skillModifierData["intelligence"]) + (skillsData["investigation"] ? proficiencyBonus : 0),
+        passiveIntelligenceName = "Passive Intelligence",
+        speedTotal = charRace.base_speed + (featureAdjustData["speed"] || 0) + (featAdjustData["speed"] || 0),
+        speed = speedTotal + ' feet',
+        speedName = "Speed",
+        dex = skillModifierData["dexterity"],
+        initiative = dex == 0 ? dex : '+' + dex,
+        initiativeName = "Initiative",
+        profBonus = '+' + proficiencyBonus;
+
+    $('#stats .list-group').append(
+        listWithBadge(profBonus, charSheet.proficiency_bonus.name) +
+        listWithBadge(initiative, initiativeName) +
+        listWithBadge(speed, speedName) +
+        listWithBadge(passiveWisdom, passiveWisdomName) +
+        listWithBadge(passiveIntelligence, passiveIntelligenceName)
+    );
+    $('#level .list-group').append(
+        listWithBadge(myChar.experience, 'Experience Points') +
+        listWithBadge(level, 'Level')
+        // TODO: Make levels for each type of class (multiclasses)
+    );
+    for (var mClass in classesList) {
+        $('#level .list-group').append(
+            listWithBadge(classesList[mClass], $class[mClass].charClass.name + ' levels')
+        );
+    }
 }
