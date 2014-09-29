@@ -61,15 +61,30 @@ $.when(
 	        // CLASS AND BACKGROUND SKILLS
 	        myChar.level_progression[0].char_class.skills.forEach(function (skill) { skillsData[skill] = true });
 	        myChar.background.skills.forEach(function (skill) { skillsData[skill] = true });
+	        // CHECK LEVELS VOOR FEATS
+	        //for (var i = 0; i < level ; i++) {
+	        //    var myLevel = myChar.level_progression[i];
+	        //    if (myLevel.feats) {
+	        //        featsData[myLevel.feats.type] = true;
+	        //    }
+	        //    if (myLevel.feats.abilities_increase) {
+	        //        abilitiesData[myLevel.feats.abilities_increase] = myLevel.feats.abilities_increase.value;
+	        //    }
+	        //    if (myLevel.feats.abilities_increase.saving_throw) {
+	        //        skillsData[myLevel.feats.abilities_increase] = true;
+
+	        //    }
+	        //}
 	        console.log(skillsData);
 	        console.log(featsData);
 	        // LOAD FEAT AND RETURN IF THEY ADJUST ANYTHING
 	        featAdjustData = loadFeats(featsData, charSheet, '#feats .list-group')
 	        // FEATURES PER CLASS
 	        for (var myClasses in $class) {
-	            var charClass = $class[myClasses].charClass;
+	            var charClass = $class[myClasses];
 	            featuresData = getFeaturesBasedOnClassLevel(charClass, classesList[charClass.type]);
-	            featureAdjustData = addActiveFeaturesToList(charClass, featuresData, classesList[myClasses], '#features .list-group');
+	            buildFeaturesList(myClasses, $class);
+	            featureAdjustData = addActiveFeaturesToList(charClass, featuresData, classesList[myClasses], '#features-' + myClasses + ' .list-group');
 	        }
 	        // ABILITIES AND SAVING THROWS
 	        var sheetAbilities = charSheet.abilities,
@@ -78,7 +93,7 @@ $.when(
 	        skillModifierData = abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities, abilitiesData, proficiencyBonus);
 	        // SKILLS
 	        skills(charSheet.skills, skillsData, skillModifierData, sheetAbilities, proficiencyBonus);
-            // CHARACTER INFO
+	        // CHARACTER INFO
 	        characterInfo(myChar, charSheet, charRace, charBackground, $class, classesList, skillsData, skillModifierData, featAdjustData, featureAdjustData, proficiencyBonus);
 	    }
 	})
@@ -88,7 +103,7 @@ $.when(
 
 function tableCell(value, hidden) {
     if (hidden) {
-        return '<td class="hidden-xs"><span>' + value + '</span></td>'
+        return '<td class="' + hidden + '"><span>' + value + '</span></td>'
     } else {
         return '<td><span>' + value + '</span></td>';
     }
@@ -107,7 +122,7 @@ function listWithBadge(key, value) {
 }
 
 function listWithModalToggle(name, description) {
-    return '<a href="javascript:void(0)" class="list-group-item" data-description="' + description + '">' + name + '</a>';
+    return '<a href="javascript:void(0)" class="list-group-item" data-description="' + description + '"><i class="fa fa-info-circle pull-right"></i>' + name + '</a>';
 }
 
 function showModal($object) {
@@ -149,6 +164,12 @@ function getFeaturesBasedOnClassLevel(charClass, level) {
     console.log(featuresData);
 
     return featuresData;
+}
+
+function buildFeaturesList(name, $class) {
+    $('#buildFeatures').append(
+        '<section id="features-' + name + '" class="panel panel-default"><header class="panel-heading"><h2 class="panel-title">Features ' + $class[name].name + '</h2></header><div class="list-group"></div></section>'
+    );
 }
 
 function addActiveFeaturesToList(charClass, featuresData, level, appendTo) {
@@ -198,12 +219,12 @@ function getProficiencyBonus(sheetPB, level) {
 
 function loadClasses(classesList) {
     var $class = {};
-    for (var myClasses in classesList) { 
+    for (var myClasses in classesList) {
         $.ajax({
             type: 'GET',
             url: 'json/classes/' + myClasses + '.json',
             dataType: 'json',
-            success:  function (data) { $class[myClasses] = data; },
+            success: function (data) { $class[myClasses] = data.charClass; },
             data: {},
             async: false
         });
@@ -242,7 +263,7 @@ function loadFeats(featsData, charSheet, location) {
 function getClassAbilities($class) {
     var classAbilities = [];
     for (var myClasses in $class) {
-        var charClass = $class[myClasses].charClass;
+        var charClass = $class[myClasses];
         for (var ability in charClass.abilities) {
             classAbilities[ability] = charClass.abilities[ability];
         }
@@ -271,13 +292,13 @@ function abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities,
         $('#abilities > .table-responsive table.table tbody').append(
             '<tr>' + tableCell(onSheet.name) +
             tableCell(baseValue) +
-            tableCell(tempModifier, true) +
-            tableCell(itemModifier, true) +
+            tableCell(tempModifier, 'hidden-xs') +
+            tableCell(itemModifier, 'hidden-xs') +
             tableCell(endScore) +
             tableCell((modifier == 0 ? modifier : '+' + modifier)) + '</tr>');
 
         $('#savingThrows > .table-responsive table.table tbody').append(
-            '<tr>' + tableCell(onSheet.name) +
+            '<tr>' + tableCell(onSheet.name, 'hidden-lg') +
             tableCell(isSkilled) +
             tableCell((savingThrowModifier == 0 ? savingThrowModifier : '+' + savingThrowModifier)) + '</tr>');
 
@@ -300,7 +321,7 @@ function skills(sheetSkills, skillsData, skillModifierData, sheetAbilities, prof
 
         $('#skills > .table-responsive table.table tbody').append(
             '<tr>' + tableCell(onSheet.name) +
-            tableCell(sheetAbilities[keyAbility].name) +
+            tableCell(sheetAbilities[keyAbility].name, 'hidden-xs') +
             tableCell(isSkilled) +
             tableCell((bonus == 0 ? bonus : '+' + bonus)) + '</tr>');
     }
@@ -316,7 +337,7 @@ function characterInfo(myChar, charSheet, charRace, charBackground, $class, clas
     var cName = myChar.name,
         cRace = charRace.name,
         cBackground = charBackground.name,
-        cClass = $class["monk"].name,
+        cClass = classesNamed(classesList, $class),
         alignment = getAlignment(charSheet, myChar.alignment.law_chaos, myChar.alignment.good_evil),
         level = 0;
 
@@ -352,13 +373,23 @@ function characterInfo(myChar, charSheet, charRace, charBackground, $class, clas
         listWithBadge(passiveIntelligence, passiveIntelligenceName)
     );
     $('#level .list-group').append(
-        listWithBadge(myChar.experience, 'Experience Points') +
+        listWithBadge((myChar.experience + ' xp'), 'Experience Points') +
         listWithBadge(level, 'Level')
         // TODO: Make levels for each type of class (multiclasses)
     );
     for (var mClass in classesList) {
         $('#level .list-group').append(
-            listWithBadge(classesList[mClass], $class[mClass].charClass.name + ' levels')
+            listWithBadge(classesList[mClass], $class[mClass].name + ' levels')
         );
     }
+}
+
+
+function classesNamed(classesList, $class) {
+    var classesName = "", i = 0;
+    for (var classes in classesList) {
+        i == 0 ? classesName += $class[classes].name : classesName += (' / ' + $class[classes].name);
+        i += 1
+    }
+    return classesName
 }

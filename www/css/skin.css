@@ -7909,6 +7909,9 @@ html {
   max-width: 100%;
   height: auto;
 }
+.fa.pull-right {
+  line-height: inherit;
+}
 @media (min-width: 768px) {
   .information.column > .gridrow {
     margin-left: -20px;

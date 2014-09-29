@@ -1,7 +1,7 @@
 {
     "character": {
         "name": "Calan 'Sol' Solis",
-        "experience": 300,
+        "experience": 6500,
         "race": {
             "type": "human",
             "variant": true,
@@ -74,7 +74,7 @@
                 "char_class": {
                     "type": "monk"
                 },
-                "monastic_traditions": "way_of_the_open_hand"
+                "path": "way_of_the_open_hand"
             },
             {
                 "char_class": {
@@ -82,7 +82,7 @@
                 },
                 "ability_score_improvement": false,
                 "feats": {
-                    "name": "resilient",
+                    "type": "resilient",
                     "abilities_increase": {
                         "wisdom": {
                             "value": 1,

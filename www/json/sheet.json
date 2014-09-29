@@ -65,37 +65,37 @@
         },
         "abilities": {
             "strength": {
-                "name": "STR",
+                "name": "Strength",
                 "saving_throw": {
                     "skilled": false
                 }
             },
             "dexterity": {
-                "name": "DEX",
+                "name": "Dexterity",
                 "saving_throw": {
                     "skilled": false
                 }
             },
             "constitution": {
-                "name": "CON",
+                "name": "Constitution",
                 "saving_throw": {
                     "skilled": false
                 }
             },
             "intelligence": {
-                "name": "INT",
+                "name": "Intelligence",
                 "saving_throw": {
                     "skilled": false
                 }
             },
             "wisdom": {
-                "name": "WIS",
+                "name": "Wisdom",
                 "saving_throw": {
                     "skilled": false
                 }
             },
             "charisma": {
-                "name": "CHA",
+                "name": "Charisma",
                 "saving_throw": {
                     "skilled": false
                 }
@@ -285,7 +285,8 @@
                 "name": "Polearm Master"
             },
             "resilient": {
-                "name": "resilient"
+                "name": "Resilient",
+                "description": "<p>Choose one ability score. You gain the following benefits:</p><ul><li>Increase the chosen ability score by 1, to a maximum of 20.</li><li>You gain proficiency in saving throws using the chosen ability.</li></ul>"
             },
             "ritual_caster": {
                 "name": "Ritual Caster"
