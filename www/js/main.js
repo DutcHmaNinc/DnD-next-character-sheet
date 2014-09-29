@@ -197,8 +197,17 @@ function getProficiencyBonus(sheetPB, level) {
 }
 
 function loadClasses(classesList) {
-    var $class = [];
-    for (var myClasses in classesList) { $.getJSON('json/classes/' + myClasses + '.json', function (data) { $class[myClasses] = data; }); }
+    var $class = {};
+    for (var myClasses in classesList) { 
+        $.ajax({
+            type: 'GET',
+            url: 'json/classes/' + myClasses + '.json',
+            dataType: 'json',
+            success:  function (data) { $class[myClasses] = data; },
+            data: {},
+            async: false
+        });
+    }
     return $class;
 }
 
