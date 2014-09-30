@@ -35,48 +35,44 @@ $.when(
                 skillsData = [],
                 skillModifierData = [],
                 abilitiesData = [],
+                abilitiesAdjustData = [],
                 featuresData = [],
                 featureAdjustData = [],
                 featsData = [],
-                featAdjustData = [];
+                featAdjustData = [],
+	            languageData = [];
 
+	        abilitiesData = fillAbilities(charSheet);
 	        // RACE DATA
-	        var myRace = myChar.race;
+	        abilitiesData = raceAbilities(abilitiesData, myChar, charRace);
+	        skillsData = raceSkills(skillsData, myChar);
+	        featsData = raceFeats(featsData, myChar);
 
-	        if (myRace.variant) {
-	            myRace.variant_choises.abilities_increase.forEach(function (ability) {
-	                abilitiesData[ability] = charRace.variant.abilities_increase.increase
-	            });
-	            myRace.variant_choises.skills.forEach(function (skill) {
-	                skillsData[skill] = true
-	            });
-	            myRace.variant_choises.feats.forEach(function (feat) {
-	                featsData[feat] = true
-	            });
-	            // TODO: languages
-	            console.log(abilitiesData);
-	        } else {
-	            // TODO: If not variant.
-	        }
+	        // LANGUAGES
+	        languageData = getLanguages(myChar.race.languages, myChar.background.languages);
+	        console.log(languageData);
 	        // CLASS AND BACKGROUND SKILLS
 	        myChar.level_progression[0].char_class.skills.forEach(function (skill) { skillsData[skill] = true });
 	        myChar.background.skills.forEach(function (skill) { skillsData[skill] = true });
 	        // CHECK LEVELS VOOR FEATS
-	        //for (var i = 0; i < level ; i++) {
-	        //    var myLevel = myChar.level_progression[i];
-	        //    if (myLevel.feats) {
-	        //        featsData[myLevel.feats.type] = true;
-	        //    }
-	        //    if (myLevel.feats.abilities_increase) {
-	        //        abilitiesData[myLevel.feats.abilities_increase] = myLevel.feats.abilities_increase.value;
-	        //    }
-	        //    if (myLevel.feats.abilities_increase.saving_throw) {
-	        //        skillsData[myLevel.feats.abilities_increase] = true;
-
-	        //    }
-	        //}
+	        for (var i = 0; i < level ; i++) {
+	            var myLevel = myChar.level_progression[i];
+	            if (myLevel.feats) {
+	                featsData[myLevel.feats.type] = true;
+	                if (myLevel.feats.abilities_increase) {
+	                    for (var ability in myLevel.feats.abilities_increase) {
+	                        abilitiesData[ability] += myLevel.feats.abilities_increase[ability].value;
+	                        if (myLevel.feats.abilities_increase[ability].saving_throw) {
+	                            abilitiesAdjustData[ability] = true;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	        console.log(abilitiesData);
 	        console.log(skillsData);
 	        console.log(featsData);
+	        console.log(abilitiesAdjustData);
 	        // LOAD FEAT AND RETURN IF THEY ADJUST ANYTHING
 	        featAdjustData = loadFeats(featsData, charSheet, '#feats .list-group')
 	        // FEATURES PER CLASS
@@ -90,7 +86,7 @@ $.when(
 	        var sheetAbilities = charSheet.abilities,
                 charAbilities = myChar.abilities,
                 classAbilities = getClassAbilities($class);
-	        skillModifierData = abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities, abilitiesData, proficiencyBonus);
+	        skillModifierData = abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities, abilitiesData, abilitiesAdjustData, proficiencyBonus);
 	        // SKILLS
 	        skills(charSheet.skills, skillsData, skillModifierData, sheetAbilities, proficiencyBonus);
 	        // CHARACTER INFO
@@ -122,13 +118,13 @@ function listWithBadge(key, value) {
 }
 
 function listWithModalToggle(name, description) {
-    return '<a href="javascript:void(0)" class="list-group-item" data-description="' + description + '"><i class="fa fa-info-circle pull-right"></i>' + name + '</a>';
+    return '<a href="javascript:void(0)" class="list-group-item" data-description="' + description + '" data-name="' + name + '"><i class="fa fa-info-circle pull-right"></i>' + name + '</a>';
 }
 
 function showModal($object) {
     $object.on('click', function () {
         var clicked = $(this);
-        $('#descriptionModal .modal-header h4').html(clicked.html());
+        $('#descriptionModal .modal-header h4').html(clicked.data('name'));
         $('#descriptionModal .modal-body').html(clicked.data('description'));
         $('#descriptionModal').modal();
     });
@@ -272,20 +268,21 @@ function getClassAbilities($class) {
     return classAbilities;
 }
 
-function abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities, abilitiesData, proficiencyBonus) {
+function abilitiesAndSavingThrows(sheetAbilities, charAbilities, classAbilities, abilitiesData, abilitiesAdjustData, proficiencyBonus) {
     var skillModifierData = [];
 
     for (var ability in sheetAbilities) {
         var onSheet = sheetAbilities[ability],
             onChar = charAbilities[ability],
             onClass = classAbilities[ability],
+            onAdjustData = abilitiesAdjustData[ability],
             raceValue = abilitiesData[ability] || 0,
             baseValue = onChar.base_value + raceValue,
             tempModifier = onChar.temp_modifier,
             itemModifier = 0,
             endScore = baseValue + tempModifier + itemModifier,
             modifier = Math.floor((endScore - 10) / 2),
-            skilled = onClass ? onClass.saving_throw.skilled : onSheet.saving_throw.skilled,
+            skilled = onClass ? onClass.saving_throw.skilled : onAdjustData ? onAdjustData : onSheet.saving_throw.skilled,
             isSkilled = skilled ? "Yes" : "No",
             savingThrowModifier = skilled ? proficiencyBonus + modifier : modifier;
 
@@ -384,6 +381,11 @@ function characterInfo(myChar, charSheet, charRace, charBackground, $class, clas
     }
 }
 
+function getLanguages(race, background) {
+    var languages = [];
+    languages = $.merge(race, background);
+    return languages
+}
 
 function classesNamed(classesList, $class) {
     var classesName = "", i = 0;
@@ -393,3 +395,48 @@ function classesNamed(classesList, $class) {
     }
     return classesName
 }
+
+function fillAbilities(charSheet) {
+    var abilities = []
+    for (var ability in charSheet.abilities) {
+        abilities[ability] = 0;
+    }
+    return abilities
+}
+
+function raceAbilities(abilitiesData, myChar, charRace) {
+    var myRace = myChar.race;
+    if (myRace.variant) {
+        myRace.variant_choises.abilities_increase.forEach(function (ability) {
+            abilitiesData[ability] += charRace.variant.abilities_increase.increase
+        });
+    } else {
+        // TODO: If not variant.
+    }
+    return abilitiesData;
+}
+
+function raceSkills(skillsData, myChar) {
+    var myRace = myChar.race;
+    if (myRace.variant) {
+        myRace.variant_choises.skills.forEach(function (skill) {
+            skillsData[skill] = true
+        });
+    } else {
+        // TODO: If not variant.
+    }
+    return skillsData;
+}
+
+function raceFeats(featsData, myChar) {
+    var myRace = myChar.race;
+    if (myRace.variant) {
+        myRace.variant_choises.feats.forEach(function (feat) {
+            featsData[feat] = true
+        });
+    } else {
+        // TODO: If not variant.
+    }
+    return featsData;
+}
+

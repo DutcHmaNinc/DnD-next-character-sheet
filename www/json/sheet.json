@@ -42,7 +42,7 @@
         "alignment": {
             "law_chaos": {
                 "law": {
-                    "name": "Lawfull"
+                    "name": "Lawful"
                 },
                 "neutral": {
                     "name": "Neutral"
@@ -323,6 +323,28 @@
             },
             "weapon_master": {
                 "name": "Weapon Master"
+            }
+        },
+        "languages": {
+            "standard": {
+                "common": { "name": "Common" },
+                "dwarvish": { "name": "Dwarvish" },
+                "elvish": { "name": "Elvish" },
+                "giant": { "name": "Giant" },
+                "gnomish": { "name": "Gnomish" },
+                "goblin": { "name": "Goblin" },
+                "halfling": { "name": "Halfling" },
+                "orc": { "name": "Orc" }
+            },
+            "exotic": { 
+                "common": { "name": "Abyssal" },
+                "celestial ": { "name": "Celestial" },
+                "draconic ": { "name": "Draconic" },
+                "deep_speech": { "name": "Deep Speech" },
+                "infernal": { "name": "Infernal" },
+                "primordial ": { "name": "Primordial" },
+                "sylvan": { "name": "Sylvan" },
+                "undercommon": { "name": "Undercommon" }
             }
         }
     }

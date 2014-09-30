@@ -1,7 +1,7 @@
 {
     "character": {
         "name": "Calan 'Sol' Solis",
-        "experience": 6500,
+        "experience": 0,
         "race": {
             "type": "human",
             "variant": true,
@@ -16,7 +16,11 @@
                 "feats": [
                     "mobile"
                 ]
-            }
+            },
+            "languages": [
+                "common",
+                "dwarvish"
+            ]
         },
         "alignment": {
             "law_chaos": "neutral",
@@ -27,6 +31,10 @@
             "skills": [
                 "insight",
                 "religion"
+            ],
+            "languages": [
+                "elvish",
+                "gnomish"
             ]
         },
         "abilities": {
