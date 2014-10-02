@@ -336,7 +336,7 @@
                 "halfling": { "name": "Halfling" },
                 "orc": { "name": "Orc" }
             },
-            "exotic": { 
+            "exotic": {
                 "common": { "name": "Abyssal" },
                 "celestial ": { "name": "Celestial" },
                 "draconic ": { "name": "Draconic" },
@@ -346,6 +346,27 @@
                 "sylvan": { "name": "Sylvan" },
                 "undercommon": { "name": "Undercommon" }
             }
+        },
+        "data_set": {
+            "skillsData": [ ],
+            "skillModifierData": [ ],
+            "abilitiesData": [ ],
+            "abilitiesAdjustData": [ ],
+            "featuresData": [ ],
+            "featureAdjustData": [ ],
+            "featsData": [ ],
+            "featAdjustData": [ ],
+            "languageData": [ ]
+        },
+        "character": {
+            "myChar": [ ],
+            "charSheet": [ ],
+            "charRace": [ ],
+            "charBackground": [ ],
+            "classesList": [ ],
+            "classesData": [ ],
+            "proficiencyBonus": [ ],
+            "level": [ ]
         }
     }
 }
