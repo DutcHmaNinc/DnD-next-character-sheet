@@ -15,12 +15,11 @@ $.when(
 		$.getJSON('json/backgrounds/' + $char.character.background.type + '.json', function (data) { $background = data; })
 	).then(function () {
 
-	    $sheet ? console.log("Sheet successfully loaded") : console.log("Error in sheet");
-	    $char ? console.log("Character successfully loaded") : console.log("Error in character");
-	    $class ? console.log("Class successfully loaded") : console.log("Error in class");
-	    $race ? console.log("Race successfully loaded") : console.log("Error in race");
-	    $background ? console.log("Background successfully loaded") : console.log("Error in background");
-
+	    if ($sheet) { console.log("Sheet successfully loaded"); } else { console.log("Error in sheet"); }
+	    if ($char) { console.log("Character successfully loaded"); } else { console.log("Error in character"); }
+	    if ($class) { console.log("Class successfully loaded"); } else { console.log("Error in class"); }
+	    if ($race) { console.log("Race successfully loaded"); } else { console.log("Error in race"); }
+	    if ($background) { console.log("Background successfully loaded"); } else { console.log("Error in background"); }
 
 	    // START BUILDING SHEET IF ALL FILES ARE LOADED
 	    if ($sheet && $char && $class && $race && $background) {
@@ -45,7 +44,7 @@ $.when(
 	        skills(data.character, data.dataSet);
 	        characterInfo(data.character, data.dataSet);
 
-            // LOGGING
+	        // LOGGING
 	        console.log("Name: " + data.character.myChar.name);
 	        console.log(data.character.classesList);
 	        console.log("Level: " + data.character.level);
@@ -54,7 +53,7 @@ $.when(
 	        console.log(data.character);
 
 	    }
-	})
+	});
 });
 
 function getData(character, dataSet) {
@@ -75,8 +74,8 @@ function getData(character, dataSet) {
     }
 
     dataSet.languageData = $.merge(character.myChar.race.languages, character.myChar.background.languages);
-    character.myChar.level_progression[0].char_class.skills.forEach(function (skill) { dataSet.skillsData[skill] = true });
-    character.myChar.background.skills.forEach(function (skill) { dataSet.skillsData[skill] = true });
+    character.myChar.level_progression[0].char_class.skills.forEach(function (skill) { dataSet.skillsData[skill] = true; });
+    character.myChar.background.skills.forEach(function (skill) { dataSet.skillsData[skill] = true; });
 
     return checkLevelsForFeats(character, dataSet);
 }
@@ -88,9 +87,11 @@ function checkLevelsForFeats(character, dataSet) {
             dataSet.featsData[myLevel.feats.type] = true;
             if (myLevel.feats.abilities_increase) {
                 for (var ability in myLevel.feats.abilities_increase) {
-                    dataSet.abilitiesData[ability] += myLevel.feats.abilities_increase[ability].value;
-                    if (myLevel.feats.abilities_increase[ability].saving_throw) {
-                        dataSet.abilitiesAdjustData[ability] = true;
+                    if (myLevel.feats.abilities_increase.hasOwnProperty(ability)) {
+                        dataSet.abilitiesData[ability] += myLevel.feats.abilities_increase[ability].value;
+                        if (myLevel.feats.abilities_increase[ability].saving_throw) {
+                            dataSet.abilitiesAdjustData[ability] = true;
+                        }
                     }
                 }
             }
@@ -99,27 +100,29 @@ function checkLevelsForFeats(character, dataSet) {
     return loadFeats(character, dataSet);
 }
 
-function loadFeats(character, dataSet, location) {
+function loadFeats(character, dataSet) {
     var featAdjustData = dataSet.featAdjustData,
         location = '#feats .list-group';
     for (var feat in dataSet.featsData) {
-        $(location).append(
-            listWithModalToggle(character.charSheet.feats[feat].name, character.charSheet.feats[feat].description || "empty")
-        );
-        if (character.charSheet.feats[feat].adjust) {
-            var ft = character.charSheet.feats[feat],
-                adjust = ft.adjust,
-                modifier;
+        if (dataSet.featsData.hasOwnProperty(feat)) {
+            $(location).append(
+                listWithModalToggle(character.charSheet.feats[feat].name, character.charSheet.feats[feat].description || "empty")
+            );
+            if (character.charSheet.feats[feat].adjust) {
+                var ft = character.charSheet.feats[feat],
+                    adjust = ft.adjust,
+                    modifier;
 
-            if (ft.level_progression) {
-                for (var i = 0; i < ft.level_progression.length ; i++) {
-                    if (ft.level_progression[i] > level) break;
-                    modifier = ft.value[i];
+                if (ft.level_progression) {
+                    for (var i = 0; i < ft.level_progression.length ; i++) {
+                        if (ft.level_progression[i] > level) break;
+                        modifier = ft.value[i];
+                    }
+                } else {
+                    modifier = ft.value;
                 }
-            } else {
-                modifier = ft.value
+                featAdjustData[adjust] = modifier;
             }
-            featAdjustData[adjust] = modifier
         }
     }
     showModal($(location + ' > a'));
@@ -129,33 +132,37 @@ function loadFeats(character, dataSet, location) {
 
 function getFeaturesPerClass(character, dataSet) {
     for (var myClasses in character.classesData) {
-        var charClass = character.classesData[myClasses],
-            classFeatures = charClass.features,
-            appendTo = '#features-' + myClasses + ' .list-group';
+        if (character.classesData.hasOwnProperty(myClasses)) {
+            var charClass = character.classesData[myClasses],
+                classFeatures = charClass.features,
+                appendTo = '#features-' + myClasses + ' .list-group';
 
-        dataSet.featuresData = getFeaturesBasedOnClassLevel(charClass, character.classesList[charClass.type]);
-        buildFeaturesList(myClasses, character.classesData);
-        for (var feature in dataSet.featuresData) {
-            $(appendTo).append(
-                listWithModalToggle(classFeatures[feature].name, classFeatures[feature].description || "empty")
-            );
-            if (classFeatures[feature].adjust) {
-                var fa = classFeatures[feature],
-                    adjust = fa.adjust,
-                    modifier;
+            dataSet.featuresData = getFeaturesBasedOnClassLevel(charClass, character.classesList[charClass.type]);
+            buildFeaturesList(myClasses, character.classesData);
+            for (var feature in dataSet.featuresData) {
+                if (dataSet.featuresData.hasOwnProperty(feature)) {
+                    $(appendTo).append(
+                        listWithModalToggle(classFeatures[feature].name, classFeatures[feature].description || "empty")
+                    );
+                    if (classFeatures[feature].adjust) {
+                        var fa = classFeatures[feature],
+                            adjust = fa.adjust,
+                            modifier;
 
-                if (fa.level_progression) {
-                    for (var i = 0; i < fa.level_progression.length ; i++) {
-                        if (fa.level_progression[i] > level) break;
-                        modifier = fa.value[i];
+                        if (fa.level_progression) {
+                            for (var i = 0; i < fa.level_progression.length ; i++) {
+                                if (fa.level_progression[i] > level) break;
+                                modifier = fa.value[i];
+                            }
+                        } else {
+                            modifier = fa.value;
+                        }
+                        dataSet.featureAdjustData[adjust] = modifier;
                     }
-                } else {
-                    modifier = fa.value
                 }
-                dataSet.featureAdjustData[adjust] = modifier
             }
+            showModal($(appendTo + ' > a'));
         }
-        showModal($(appendTo + ' > a'));
     }
     return getSkillModifierData(character, dataSet);
 }
@@ -177,7 +184,11 @@ function characterInfo(character, dataSet) {
         alignment = getAlignment(character.charSheet, character.myChar.alignment.law_chaos, character.myChar.alignment.good_evil),
         level = 0;
 
-    for (var mClass in character.classesList) { level += character.classesList[mClass]; }
+    for (var mClass in character.classesList) {
+        if (character.classesList.hasOwnProperty(mClass)) {
+            level += character.classesList[mClass];
+        }
+    }
 
     $('#characterName').append('<p>Name: </p><h1>' + cName + '</h1>');
 
@@ -188,15 +199,15 @@ function characterInfo(character, dataSet) {
         label('Level: ', level) + '<br />' +
         label('Alignment: ', alignment) + '</p>');
 
-    var passiveWisdom = 10 + (dataSet.skillModifierData["wisdom"]) + (dataSet.skillsData["perception"] ? character.proficiencyBonus : 0),
+    var passiveWisdom = 10 + (dataSet.skillModifierData.wisdom) + (dataSet.skillsData.perception ? character.proficiencyBonus : 0),
         passiveWisdomName = "Passive wisdom",
-        passiveIntelligence = 10 + (dataSet.skillModifierData["intelligence"]) + (dataSet.skillsData["investigation"] ? character.proficiencyBonus : 0),
+        passiveIntelligence = 10 + (dataSet.skillModifierData.intelligence) + (dataSet.skillsData.investigation ? character.proficiencyBonus : 0),
         passiveIntelligenceName = "Passive Intelligence",
-        speedTotal = character.charRace.base_speed + (dataSet.featureAdjustData["speed"] || 0) + (dataSet.featAdjustData["speed"] || 0),
+        speedTotal = character.charRace.base_speed + (dataSet.featureAdjustData.speed || 0) + (dataSet.featAdjustData.speed || 0),
         speed = speedTotal + ' feet',
         speedName = "Speed",
-        dex = dataSet.skillModifierData["dexterity"],
-        initiative = dex == 0 ? dex : '+' + dex,
+        dex = dataSet.skillModifierData.dexterity,
+        initiative = dex === 0 ? dex : '+' + dex,
         initiativeName = "Initiative",
         profBonus = '+' + character.proficiencyBonus;
 
@@ -211,10 +222,12 @@ function characterInfo(character, dataSet) {
         listWithBadge((character.myChar.experience + ' xp'), 'Experience Points') +
         listWithBadge(character.level, 'Level')
     );
-    for (var mClass in character.classesList) {
-        $('#level .list-group').append(
-            listWithBadge(character.classesList[mClass], character.classesData[mClass].name + ' levels')
-        );
+    for (mClass in character.classesList) {
+        if (character.classesList.hasOwnProperty(mClass)) {
+            $('#level .list-group').append(
+                listWithBadge(character.classesList[mClass], character.classesData[mClass].name + ' levels')
+            );
+        }
     }
 }
 
@@ -222,18 +235,20 @@ function skills(character, dataSet) {
     var sheetSkills = character.charSheet.skills,
         sheetAbilities = character.charSheet.abilities;
     for (var skill in sheetSkills) {
-        var onSheet = sheetSkills[skill],
-            keyAbility = onSheet.key_ability,
-            modifier = dataSet.skillModifierData[keyAbility],
-            skilled = !!dataSet.skillsData[skill],
-            isSkilled = skilled ? "Yes" : "No",
-            bonus = skilled ? character.proficiencyBonus + modifier : modifier;
+        if (sheetSkills.hasOwnProperty(skill)) {
+            var onSheet = sheetSkills[skill],
+                keyAbility = onSheet.key_ability,
+                modifier = dataSet.skillModifierData[keyAbility],
+                skilled = !!dataSet.skillsData[skill],
+                isSkilled = skilled ? "Yes" : "No",
+                bonus = skilled ? character.proficiencyBonus + modifier : modifier;
 
-        $('#skills > .table-responsive table.table tbody').append(
-            '<tr>' + tableCell(onSheet.name) +
-            tableCell(sheetAbilities[keyAbility].name, 'hidden-xs') +
-            tableCell(isSkilled) +
-            tableCell((bonus == 0 ? bonus : '+' + bonus)) + '</tr>');
+            $('#skills > .table-responsive table.table tbody').append(
+                '<tr>' + tableCell(onSheet.name) +
+                tableCell(sheetAbilities[keyAbility].name, 'hidden-xs') +
+                tableCell(isSkilled) +
+                tableCell((bonus === 0 ? bonus : '+' + bonus)) + '</tr>');
+        }
     }
 }
 
@@ -245,34 +260,36 @@ function abilitiesAndSavingThrows(character, dataSet) {
         charAbilities = character.myChar.abilities;
 
     for (var ability in sheetAbilities) {
-        var onSheet = sheetAbilities[ability],
-            onChar = charAbilities[ability],
-            onClass = classAbilities[ability],
-            onAdjustData = dataSet.abilitiesAdjustData[ability],
-            raceValue = dataSet.abilitiesData[ability] || 0,
-            baseValue = onChar.base_value + raceValue,
-            tempModifier = onChar.temp_modifier,
-            itemModifier = 0,
-            endScore = baseValue + tempModifier + itemModifier,
-            modifier = Math.floor((endScore - 10) / 2),
-            skilled = onClass ? onClass.saving_throw.skilled : onAdjustData ? onAdjustData : onSheet.saving_throw.skilled,
-            isSkilled = skilled ? "Yes" : "No",
-            savingThrowModifier = skilled ? character.proficiencyBonus + modifier : modifier;
+        if (sheetAbilities.hasOwnProperty(ability)) {
+            var onSheet = sheetAbilities[ability],
+                onChar = charAbilities[ability],
+                onClass = classAbilities[ability],
+                onAdjustData = dataSet.abilitiesAdjustData[ability],
+                raceValue = dataSet.abilitiesData[ability] || 0,
+                baseValue = onChar.base_value + raceValue,
+                tempModifier = onChar.temp_modifier,
+                itemModifier = 0,
+                endScore = baseValue + tempModifier + itemModifier,
+                modifier = Math.floor((endScore - 10) / 2),
+                skilled = onClass ? onClass.saving_throw.skilled : onAdjustData ? onAdjustData : onSheet.saving_throw.skilled,
+                isSkilled = skilled ? "Yes" : "No",
+                savingThrowModifier = skilled ? character.proficiencyBonus + modifier : modifier;
 
-        $('#abilities > .table-responsive table.table tbody').append(
-            '<tr>' + tableCell(onSheet.name) +
-            tableCell(baseValue) +
-            tableCell(tempModifier, 'hidden-xs') +
-            tableCell(itemModifier, 'hidden-xs') +
-            tableCell(endScore) +
-            tableCell((modifier == 0 ? modifier : '+' + modifier)) + '</tr>');
+            $('#abilities > .table-responsive table.table tbody').append(
+                '<tr>' + tableCell(onSheet.name) +
+                tableCell(baseValue) +
+                tableCell(tempModifier, 'hidden-xs') +
+                tableCell(itemModifier, 'hidden-xs') +
+                tableCell(endScore) +
+                tableCell((modifier === 0 ? modifier : '+' + modifier)) + '</tr>');
 
-        $('#savingThrows > .table-responsive table.table tbody').append(
-            '<tr>' + tableCell(onSheet.name, 'hidden-lg') +
-            tableCell(isSkilled) +
-            tableCell((savingThrowModifier == 0 ? savingThrowModifier : '+' + savingThrowModifier)) + '</tr>');
+            $('#savingThrows > .table-responsive table.table tbody').append(
+                '<tr>' + tableCell(onSheet.name, 'hidden-lg') +
+                tableCell(isSkilled) +
+                tableCell((savingThrowModifier === 0 ? savingThrowModifier : '+' + savingThrowModifier)) + '</tr>');
 
-        skillModifierData[ability] = modifier;
+            skillModifierData[ability] = modifier;
+        }
     }
 
     return skillModifierData;

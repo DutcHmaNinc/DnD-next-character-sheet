@@ -4,10 +4,9 @@
 
 function tableCell(value, hidden) {
     if (hidden) {
-        return '<td class="' + hidden + '"><span>' + value + '</span></td>'
-    } else {
-        return '<td><span>' + value + '</span></td>';
+        return '<td class="' + hidden + '"><span>' + value + '</span></td>';
     }
+    return '<td><span>' + value + '</span></td>';
 }
 
 function label(name, info) {
@@ -50,16 +49,19 @@ function showModal($object) {
 // ------------------- //
 
 function loadClasses(classesList) {
-    var $class = {};
+    var $class = {}, succesData = function (data) { $class[myClasses] = data.charClass; };
+
     for (var myClasses in classesList) {
-        $.ajax({
-            type: 'GET',
-            url: 'json/classes/' + myClasses + '.json',
-            dataType: 'json',
-            success: function (data) { $class[myClasses] = data.charClass; },
-            data: {},
-            async: false
-        });
+        if (classesList.hasOwnProperty(myClasses)) {
+            $.ajax({
+                type: 'GET',
+                url: 'json/classes/' + myClasses + '.json',
+                dataType: 'json',
+                success: succesData,
+                data: {},
+                async: false
+            });
+        }
     }
     return $class;
 }
@@ -76,7 +78,7 @@ function calculateLevel(xpList, xp) {
 function getLevelperClass(myChar, level) {
     var classesList = [];
     for (var i = 0; i < level ; i++) {
-        classesList[myChar.level_progression[i].char_class.type] ? classesList[myChar.level_progression[i].char_class.type] += 1 : classesList[myChar.level_progression[i].char_class.type] = 1
+        classesList[myChar.level_progression[i].char_class.type] = (classesList[myChar.level_progression[i].char_class.type] || 0) + 1;
     }
     return classesList;
 }
@@ -85,7 +87,11 @@ function getFeaturesBasedOnClassLevel(charClass, level) {
     var classFeatures = charClass.features,
         featuresData = [];
     for (var feature in classFeatures) {
-        classFeatures[feature].level <= level ? featuresData[feature] = true : "";
+        if (classFeatures.hasOwnProperty(feature)) {
+            if (classFeatures[feature].level <= level) {
+                featuresData[feature] = true;
+            }
+        }
     }
     return featuresData;
 }
@@ -104,9 +110,13 @@ function getProficiencyBonus(sheetPB, level) {
 function getClassAbilities($class) {
     var classAbilities = [];
     for (var myClasses in $class) {
-        var charClass = $class[myClasses];
-        for (var ability in charClass.abilities) {
-            classAbilities[ability] = charClass.abilities[ability];
+        if ($class.hasOwnProperty(myClasses)) {
+            var charClass = $class[myClasses];
+            for (var ability in charClass.abilities) {
+                if (charClass.abilities.hasOwnProperty(ability)) {
+                    classAbilities[ability] = charClass.abilities[ability];
+                }
+            }
         }
     }
     return classAbilities;
@@ -128,18 +138,21 @@ function returnDataAndCharacter(character, dataSet) {
 }
 
 function classesNamed(classesList, $class) {
-    var classesName = "", i = 0;
+    var classesName = "";
     for (var classes in classesList) {
-        i == 0 ? classesName += $class[classes].name : classesName += (' / ' + $class[classes].name);
-        i += 1
+        if (classesList.hasOwnProperty(classes)) {
+            classesName += (!classesName) ? $class[classes].name : ' / ' + $class[classes].name;
+        }
     }
-    return classesName
+    return classesName;
 }
 
 function fillAbilities(charSheet) {
-    var abilities = []
+    var abilities = [];
     for (var ability in charSheet.abilities) {
-        abilities[ability] = 0;
+        if (charSheet.abilities.hasOwnProperty(ability)) {
+            abilities[ability] = 0;
+        }
     }
-    return abilities
+    return abilities;
 }
