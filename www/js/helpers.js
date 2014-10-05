@@ -126,6 +126,24 @@ function getAlignment(charSheet, lawChaos, goodEvil) {
     return lawChaos == "neutral" && goodEvil == "neutral" ? "True Neutral" : charSheet.alignment.law_chaos[lawChaos].name + ' ' + charSheet.alignment.good_evil[goodEvil].name;
 }
 
+
+function getLanguages(character, dataSet) {
+    var languages = "";
+    for (var i = 0 ; i < dataSet.languageData.length ; i++) {
+        var check = character.charSheet.languages,
+            standard = check.standard[dataSet.languageData[i]],
+            exotic = check.exotic[dataSet.languageData[i]];
+        if (standard) {
+            languages += (!languages) ? standard.name : ', ' + standard.name;
+        } else if (exotic) {
+            languages += (!languages) ? exotic.name : ', ' + exotic.name;
+        } else {
+            console.log('Error with language: ' + dataSet.languageData[i]);
+        }
+    }
+    return languages;
+}
+
 // OTHER
 //
 // ------------------- //

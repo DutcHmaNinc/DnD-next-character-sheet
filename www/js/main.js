@@ -178,10 +178,12 @@ function getSkillModifierData(character, dataSet) {
 
 function characterInfo(character, dataSet) {
     var cName = character.myChar.name,
+        img = character.myChar.image,
         cRace = character.charRace.name,
         cBackground = character.charBackground.name,
         cClass = classesNamed(character.classesList, character.classesData),
         alignment = getAlignment(character.charSheet, character.myChar.alignment.law_chaos, character.myChar.alignment.good_evil),
+        languages = getLanguages(character, dataSet),
         level = 0;
 
     for (var mClass in character.classesList) {
@@ -190,14 +192,16 @@ function characterInfo(character, dataSet) {
         }
     }
 
-    $('#characterName').append('<p>Name: </p><h1>' + cName + '</h1>');
+    //$('#characterName').append('<p>Name: </p><h1>' + cName + '</h1>');
 
     $('#characterInfo .panel-body').append(
+        '<img src="img/'+ img +'" /><h1>' + cName + '</h1>' +
         '<p>' + label('Race: ', cRace) + '<br />' +
         label('Background: ', cBackground) + '<br />' +
         label('Class: ', cClass) + '<br />' +
         label('Level: ', level) + '<br />' +
-        label('Alignment: ', alignment) + '</p>');
+        label('Alignment: ', alignment) + '<br />' +
+        label('Languages: ', languages) + '</p>');
 
     var passiveWisdom = 10 + (dataSet.skillModifierData.wisdom) + (dataSet.skillsData.perception ? character.proficiencyBonus : 0),
         passiveWisdomName = "Passive wisdom",

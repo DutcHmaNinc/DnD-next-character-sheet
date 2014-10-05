@@ -1,6 +1,7 @@
 {
     "character": {
         "name": "Calan 'Sol' Solis",
+        "image": "calan.png",
         "experience": 0,
         "race": {
             "type": "human",
@@ -181,6 +182,21 @@
                     "type": "monk"
                 }
             }
-        ]
+        ],
+        "equipment": {
+            "weapons": {
+                "quarterstaff": {
+
+                },
+                "darts": {
+                    "amount": 10
+                }
+            },
+            "armor": {
+            },
+            "apparel": {
+
+            }
+        }
     }
 }

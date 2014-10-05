@@ -39,27 +39,27 @@ body, html {
 
 .column.info {
     .panel-body {
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        h1 {
+            display: block;
+            text-align: center;
+            border-bottom: @panel-default-border 1px solid;
+            padding-bottom: @panel-body-padding;
+        }
+
         p {
-            img {
-                display: block;
-                margin: 0 auto;
-            }
-
-            > strong,
             > span {
-                float: left;
-                display: block;
-            }
-
-            > span {
-                width: 45%;
+                width: 35%;
                 font-size: @font-size-small;
+                /*display: block;
+                text-align: left;*/
+                display: inline-block;
                 text-align: right;
                 padding-right: @panel-body-padding;
-            }
-
-            > strong {
-                width: 55%;
             }
         }
     }
