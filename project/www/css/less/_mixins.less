@@ -1,0 +1,52 @@
+@import "../skin.less";
+
+// STICKY FOOTER
+//
+// ----------------------------------------------------- //
+
+
+.sticky-footer-style (@a) when (isnumber(@a)) {
+    height: 100%;
+
+    .sticky-wrap {
+        min-height: 100%;
+        margin-bottom: 0 - @a;
+
+        .sticky-push {
+            height: @a;
+        }
+    }
+}
+
+.sticky-footer-style (@a) when (default()) {
+    .sticky-wrap {
+        margin-bottom: @a;
+
+        .sticky-push {
+            height: @a;
+        }
+    }
+}
+
+.footer-wrap-style (@a) when (isnumber(@a)) {
+    overflow: hidden;
+    height: @a;
+}
+
+.footer-wrap-style (@a) when (default()) {
+    height: @a;
+}
+
+.no-li {
+    margin:0;
+    padding:0;
+    ul {
+        margin:0;
+        padding:0;
+    }
+    li {
+        margin:0;
+        padding:0;
+        list-style: none none;
+    }
+}

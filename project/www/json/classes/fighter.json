@@ -1,0 +1,44 @@
+{
+    "charClass": {
+        "name": "Fighter",
+        "type": "fighter",
+        "abilities": {
+            "strength": {
+                "saving_throw": {
+                    "skilled": true
+                }
+            },
+            "constitution": {
+                "saving_throw": {
+                    "skilled": true
+                }
+            }
+        },
+        "level_progression": [
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { },
+            { }
+        ],
+        "skills": {
+        },
+        "features": {
+        }
+    }
+}

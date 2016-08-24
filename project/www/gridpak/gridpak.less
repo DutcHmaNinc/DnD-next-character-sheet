@@ -1,0 +1,41 @@
+.grid () {
+    // Voor de omvattende wrapper van de kolommen
+    .row(@gutter-rem: @gutter_rem) {
+        margin-left: 0 - @gutter-rem;
+    }
+    // Kolom styling
+    .column () {
+        border: 0 solid transparent;
+        border: 0 solid rgba(0,0,0,0);
+        float: left;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-background-clip: padding-box !important;
+        -webkit-background-clip: padding-box !important;
+        background-clip: padding-box !important;
+    }
+    // Span een aantal kolommen
+    .span (@num, @max: @max_columns, @gutter-pc: @gutter_pc, @gutter-rem: @gutter_rem, @pad: @padding_rem) {
+        .grid.span-firstchild(@num, @max, @gutter-pc, @gutter-rem, @pad);
+        margin-left: @gutter-pc;
+
+        & when ( @num = @max) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+    // Voor eerste kind omdat die geen margin aan de linkerkant moet hebben.
+    .span-firstchild (@num, @max: @max_columns, @gutter-pc: @gutter_pc, @gutter-rem: @gutter_rem, @pad: @padding_rem ) {
+        @one_col: (100% - (@gutter-pc * (@max - 1))) / @max;
+
+        width: (@one_col * @num) + (@gutter-pc * (@num - 1));
+        border-left-width: @gutter-rem;
+        padding-left: @pad;
+        padding-right: @pad;
+
+        & when ( @num = @max) {
+            width: 100%;
+        }
+    }
+}

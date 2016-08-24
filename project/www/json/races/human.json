@@ -1,0 +1,46 @@
+{
+    "charRace": {
+        "name": "Human",
+        "languages": {
+            "known": [
+                "Common"
+            ],
+            "choose": 1
+        },
+        "base_speed": 30,
+        "basic": {
+            "abilities_increase": {
+                "strength": {
+                    "increase": 1
+                },
+                "dexterity": {
+                    "increase": 1
+                },
+                "constitution": {
+                    "increase": 1
+                },
+                "intelligence": {
+                    "increase": 1
+                },
+                "wisdom": {
+                    "increase": 1
+                },
+                "charisma": {
+                    "increase": 1
+                }
+            }
+        },
+        "variant": {
+            "abilities_increase": {
+                "choose": 2,
+                "increase": 1,
+                "skills": {
+                    "choose": 1
+                },
+                "feat": {
+                    "choose": 1
+                }
+            }
+        }
+    }
+}
