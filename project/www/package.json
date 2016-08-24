@@ -1,5 +1,5 @@
 ﻿{
-  "name": "angular2-quickstart",
+  "name": "dnd-character-sheet",
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
