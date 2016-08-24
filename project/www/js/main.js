@@ -195,7 +195,7 @@ function characterInfo(character, dataSet) {
     //$('#characterName').append('<p>Name: </p><h1>' + cName + '</h1>');
 
     $('#characterInfo .panel-body').append(
-        '<img src="img/'+ img +'" /><h1>' + cName + '</h1>' +
+        '<img src="images/'+ img +'" /><h1>' + cName + '</h1>' +
         '<p>' + label('Race: ', cRace) + '<br />' +
         label('Background: ', cBackground) + '<br />' +
         label('Class: ', cClass) + '<br />' +
